@@ -10,6 +10,9 @@ import 'package:material/widgets/sin_tareas.dart';
 import 'package:material/widgets/tarjeta_tarea.dart';
 import 'package:provider/provider.dart';
 
+/// Pantalla principal de la aplicación que muestra el listado de tareas.
+///
+/// Permite filtrar, agregar, editar, eliminar y reordenar las tareas.
 class PaginaPpal extends StatefulWidget {
   const PaginaPpal({super.key});
 
@@ -22,6 +25,9 @@ class _PaginaPpalState extends State<PaginaPpal> {
   CategoriaTarea? _filtroCategoria;
   bool? _filtroCompletada;
 
+  /// Retorna la lista de tareas filtrada según la categoría y el estado seleccionados.
+  ///
+  /// Si los filtros son `null`, se incluyen todas las tareas.
   List<Tarea> get _tareasFiltradas {
     return _tareas.where((tarea) {
       final coincideCategoria =
@@ -32,12 +38,14 @@ class _PaginaPpalState extends State<PaginaPpal> {
     }).toList();
   }
 
+  /// Agrega una nueva tarea a la lista local.
   void _agregarTarea(Tarea tarea) {
     setState(() {
       _tareas.add(tarea);
     });
   }
 
+  /// Elimina una tarea de la lista y muestra un SnackBar para deshacer la acción.
   void _eliminarTarea(Tarea tarea) {
     final index = _tareas.indexOf(tarea);
     if (index == -1) return;
@@ -62,6 +70,7 @@ class _PaginaPpalState extends State<PaginaPpal> {
     );
   }
 
+  /// Cambia el estado de completado de una tarea.
   void _cambiarEstadoTarea(Tarea tarea) {
     final index = _tareas.indexOf(tarea);
     if (index == -1) return;
@@ -70,6 +79,7 @@ class _PaginaPpalState extends State<PaginaPpal> {
     });
   }
 
+  /// Navega a la pantalla de edición y actualiza la tarea si se guardan cambios.
   void _editarTarea(Tarea tarea) async {
     final tareaActualizada = await Navigator.pushNamed(
       context,
@@ -196,6 +206,7 @@ class _PaginaPpalState extends State<PaginaPpal> {
     );
   }
 
+  /// Construye la fila de filtros para Categoría y Estado.
   Widget _buildFiltros() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),

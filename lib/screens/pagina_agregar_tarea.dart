@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:material/models/tarea.dart';
 
+/// Pantalla que permite al usuario crear una nueva tarea o editar una existente.
+///
+/// Si se recibe una Tarea como argumento, la pantalla se configura en modo edición.
 class PaginaAgregarTarea extends StatefulWidget {
   const PaginaAgregarTarea({super.key});
 
@@ -18,6 +21,9 @@ class _PaginaAgregarTareaState extends State<PaginaAgregarTarea> {
   Tarea? _tareaOriginal;
   bool _isInitialized = false;
 
+  /// Inicializa el estado de la pantalla.
+  ///
+  /// Verifica si se pasaron argumentos (una Tarea) para configurar el modo edición.
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -42,6 +48,9 @@ class _PaginaAgregarTareaState extends State<PaginaAgregarTarea> {
     super.dispose();
   }
 
+  /// Valida el formulario y retorna la tarea creada o editada.
+  ///
+  /// Si el formulario es válido, hace un Navigator.pop devolviendo un objeto Tarea.
   void _guardarTarea() {
     if (_formKey.currentState!.validate()) {
       final tareaResultante = Tarea(
